@@ -23,7 +23,7 @@ class AttendanceList() : ArrayList<Attendance>() {
             it.empId == empId &&
                     it.checkInDateTime.toLocalDate() == checkOutDateTime.toLocalDate() &&
                     it.checkOutDateTime == null &&
-                    it.checkInDateTime.truncatedTo(ChronoUnit.MINUTES) >= checkOutDateTime.truncatedTo(ChronoUnit.MINUTES)
+                    it.checkInDateTime.truncatedTo(ChronoUnit.MINUTES) < checkOutDateTime.truncatedTo(ChronoUnit.MINUTES)
         }
     }
 
@@ -55,6 +55,10 @@ class AttendanceList() : ArrayList<Attendance>() {
             ansList.add("$lastEmployeeId  ->  ${totMins.toHours()}h ${totMins.toMinutesPart()}m")
         }
         return ansList
+    }
+
+    fun delete(empId: String, date : LocalDate): Boolean{
+        return this.removeIf { it.empId == empId && it.checkInDateTime.toLocalDate() == date }
     }
 
     override fun toString(): String {

@@ -103,6 +103,16 @@ class EmployeeManager {
         return "Check out successful!\n$attendance"
     }
 
+    fun deleteAttendanceEntry(empId: String,date: String): String{
+        val parsedDate=parseDate(date)
+        if(parsedDate==null)  {
+            return "Invalid date. Failed to delete."
+        }
+        if(attendanceList.delete(empId,parsedDate)){
+            return "Deletion Successful!"
+        }
+        return "No Attendance entry find with the give details. Failed to delete"
+    }
 
     fun getAttendanceList(): String{
        return attendanceList.toString()

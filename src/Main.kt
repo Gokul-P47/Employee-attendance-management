@@ -11,7 +11,8 @@ fun main() {
         println("6.Get Attendance List")
         println("7.Get Incomplete Attendances")
         println("8.Get Total Working Hours Between two Dates")
-        println("9.Exit")
+        println("9.Delete Attendance Entry")
+        println("10.Exit")
         print("Choose an option: ")
         when (readln().toIntOrNull()) {
             1->{
@@ -39,6 +40,9 @@ fun main() {
                 getTotalWorkingHrsBetweenDate(employeeManager)
             }
             9->{
+                deleteAttendanceEntry(employeeManager)
+            }
+            10->{
                 break
             }
             else -> println("Invalid option")
@@ -128,4 +132,12 @@ fun getTotalWorkingHrsBetweenDate(employeeManager: EmployeeManager){
         println("Employee Id | Working hours")
         result.forEach { println(it) }
     }
+}
+
+fun deleteAttendanceEntry(employeeManager: EmployeeManager){
+    print("Enter employee id:")
+    val empId=readln().trim()
+    print("Enter date (dd-MM-yyyy):")
+    val date=readln().trim()
+    println(employeeManager.deleteAttendanceEntry(empId,date))
 }
